@@ -65,6 +65,11 @@ span {
 nav div {
   background: none;
   border-radius: 5%;
+  cursor: pointer;
   width: 12%;
   height: 80%;
+  opacity: 0.6;
+}
+nav div:hover {
+  opacity: 1;
 }

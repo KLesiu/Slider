@@ -34,7 +34,7 @@ const addBasicLayout = () => {
 const addPhotoToArray = (i) => {
   for (i = 1; i < 10; i++) {
     let photo;
-    photo = `<img src="img/img${i}.jpg" />`;
+    photo = `<img class="${i}" src="img/img${i}.jpg" />`;
     photoHolder.push(photo);
   }
 };
@@ -48,20 +48,31 @@ const updateNav = () => {
   const photoWindows = document.querySelectorAll("nav div");
   console.log(slideNumber);
   if (slideNumber > 3) {
-    photoWindows[0].innerHTML = `<img src="img/img${4}.jpg" />`;
-    photoWindows[1].innerHTML = `<img src="img/img${5}.jpg" />`;
-    photoWindows[2].innerHTML = `<img src="img/img${6}.jpg" />`;
-    photoWindows[3].innerHTML = `<img src="img/img${7}.jpg" />`;
-    photoWindows[4].innerHTML = `<img src="img/img${8}.jpg" />`;
-    photoWindows[5].innerHTML = `<img src="img/img${9}.jpg" />`;
+    photoWindows[0].innerHTML = `<img class="${4}" src="img/img${4}.jpg" />`;
+    photoWindows[1].innerHTML = `<img class="${5}" src="img/img${5}.jpg" />`;
+    photoWindows[2].innerHTML = `<img class="${6}" src="img/img${6}.jpg" />`;
+    photoWindows[3].innerHTML = `<img class="${7}" src="img/img${7}.jpg" />`;
+    photoWindows[4].innerHTML = `<img class="${8}" src="img/img${8}.jpg" />`;
+    photoWindows[5].innerHTML = `<img class="${9}" src="img/img${9}.jpg" />`;
   } else if (slideNumber <= 3) {
-    photoWindows[0].innerHTML = `<img src="img/img${1}.jpg" />`;
-    photoWindows[1].innerHTML = `<img src="img/img${2}.jpg" />`;
-    photoWindows[2].innerHTML = `<img src="img/img${3}.jpg" />`;
-    photoWindows[3].innerHTML = `<img src="img/img${4}.jpg" />`;
-    photoWindows[4].innerHTML = `<img src="img/img${5}.jpg" />`;
-    photoWindows[5].innerHTML = `<img src="img/img${6}.jpg" />`;
+    photoWindows[0].innerHTML = `<img class="${1}" src="img/img${1}.jpg" />`;
+    photoWindows[1].innerHTML = `<img class="${2}" src="img/img${2}.jpg" />`;
+    photoWindows[2].innerHTML = `<img class="${3}" src="img/img${3}.jpg" />`;
+    photoWindows[3].innerHTML = `<img class="${4}" src="img/img${4}.jpg" />`;
+    photoWindows[4].innerHTML = `<img class="${5}" src="img/img${5}.jpg" />`;
+    photoWindows[5].innerHTML = `<img class="${6}" src="img/img${6}.jpg" />`;
   }
+  photoWindows.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const index = e.target;
+      for (i = 0; i < 10; i++) {
+        if (index.classList.contains(`${i}`)) {
+          slideNumber = i;
+          photoField.innerHTML = photoHolder[slideNumber - 1];
+        }
+      }
+    });
+  });
 };
 const autoSlider = () => {
   if (slideNumber >= 9) {
