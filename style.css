@@ -3,6 +3,23 @@
   margin: 0;
   padding: 0;
 }
+body {
+  position: relative;
+}
+body button {
+  background-color: rgb(54, 54, 54);
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  height: 30px;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 80px;
+}
+body button:hover {
+  background-color: rgb(117, 117, 117);
+}
 main {
   align-items: center;
   background-color: black;
@@ -14,37 +31,40 @@ main {
 }
 .container {
   align-items: center;
-  background-color: white;
-  border: 20px solid grey;
-  border-radius: 10px;
+  background: none;
+
+  border-radius: 20px;
   display: flex;
   height: 60%;
   justify-content: space-around;
-  width: 50%;
+  width: 80%;
 }
 nav {
   align-items: center;
-  background-color: rgb(255, 255, 255);
-  border: 10px solid grey;
+  background-color: rgba(255, 255, 255, 0.075);
+
   border-radius: 10px;
   display: flex;
   height: 20%;
   justify-content: space-around;
   width: 80%;
 }
-.img-holder {
-  background-color: rgb(90, 181, 197);
-  height: 80%;
+
+img {
+  border-radius: 20px;
+  height: 100%;
   width: 100%;
 }
 span {
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
   margin: 0%;
   padding: 0;
   width: 20%;
 }
 nav div {
-  background-color: red;
+  background: none;
+  border-radius: 5%;
   width: 12%;
   height: 80%;
 }
