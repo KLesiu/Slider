@@ -6,6 +6,7 @@ const autoButton = document.createElement("button");
 let photoHolder = [];
 let slideNumber = 0;
 let slideTimeout;
+let numberOfImages;
 const arrowBack = document.createElement("span");
 const arrowForward = document.createElement("span");
 
@@ -21,7 +22,6 @@ const addBasicLayout = () => {
   arrowBack.style = "font-size:60px;text-align:right;";
   container.appendChild(arrowBack);
 
-  photoField.style = "width:80%;height:100%";
   container.appendChild(photoField);
   addPhotoToArray();
   slideNumber = Math.floor(Math.random() * photoHolder.length);
@@ -37,6 +37,7 @@ const addPhotoToArray = (i) => {
     photo = `<img class="${i}" src="img/img${i}.jpg" />`;
     photoHolder.push(photo);
   }
+  numberOfImages = photoHolder.length - 1;
 };
 const addDivsToNav = () => {
   for (i = 0; i < 6; i++) {
@@ -46,7 +47,7 @@ const addDivsToNav = () => {
 };
 const updateNav = () => {
   const photoWindows = document.querySelectorAll("nav div");
-  console.log(slideNumber);
+
   if (slideNumber > 3) {
     photoWindows[0].innerHTML = `<img class="${4}" src="img/img${4}.jpg" />`;
     photoWindows[1].innerHTML = `<img class="${5}" src="img/img${5}.jpg" />`;
@@ -75,7 +76,7 @@ const updateNav = () => {
   });
 };
 const autoSlider = () => {
-  if (slideNumber >= 9) {
+  if (slideNumber >= numberOfImages + 1) {
     slideNumber = 0;
     photoField.innerHTML = photoHolder[0];
     updateNav();
@@ -92,8 +93,8 @@ addBasicLayout();
 addDivsToNav();
 container.firstChild.addEventListener("click", () => {
   if (slideNumber <= 0) {
-    photoField.innerHTML = photoHolder[8];
-    slideNumber = 8;
+    photoField.innerHTML = photoHolder[numberOfImages];
+    slideNumber = numberOfImages;
   } else if (slideNumber >= 0) {
     photoField.innerHTML = photoHolder[slideNumber - 1];
     slideNumber = slideNumber - 1;
@@ -102,10 +103,10 @@ container.firstChild.addEventListener("click", () => {
   updateNav(slideNumber);
 });
 container.lastChild.addEventListener("click", () => {
-  if (slideNumber >= 8) {
+  if (slideNumber >= numberOfImages) {
     photoField.innerHTML = photoHolder[0];
     slideNumber = 0;
-  } else if (slideNumber <= 8) {
+  } else if (slideNumber <= numberOfImages) {
     photoField.innerHTML = photoHolder[slideNumber + 1];
     slideNumber = slideNumber + 1;
   }
@@ -120,5 +121,4 @@ autoButton.addEventListener("click", () => {
     autoButton.innerHTML = "OFF Auto";
     autoSlider();
   }
-  console.log(autoButton.value);
 });
