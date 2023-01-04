@@ -5,7 +5,7 @@ const photoField = document.createElement("div");
 const autoButton = document.createElement("button");
 let photoHolder = [];
 let slideNumber = 0;
-
+let slideTimeout;
 const arrowBack = document.createElement("span");
 const arrowForward = document.createElement("span");
 
@@ -13,7 +13,7 @@ const addBasicLayout = () => {
   container.classList.add("container");
   main.appendChild(container);
   main.appendChild(nav);
-  autoButton.innerText = "AUTO";
+  autoButton.innerText = "Auto";
   document.body.appendChild(autoButton);
   document.body.appendChild(main);
   arrowBack.innerText = "arrow_back";
@@ -78,13 +78,16 @@ const autoSlider = () => {
   if (slideNumber >= 9) {
     slideNumber = 0;
     photoField.innerHTML = photoHolder[0];
+    updateNav();
   } else {
     slideNumber = slideNumber + 1;
     photoField.innerHTML = photoHolder[slideNumber - 1];
+    updateNav();
   }
 
-  setTimeout(autoSlider, 5000);
+  slideTimeout = setTimeout(autoSlider, 2000);
 };
+const changeOpacity = () => {};
 addBasicLayout();
 addDivsToNav();
 container.firstChild.addEventListener("click", () => {
@@ -110,5 +113,12 @@ container.lastChild.addEventListener("click", () => {
   updateNav(slideNumber);
 });
 autoButton.addEventListener("click", () => {
-  autoSlider();
+  if (autoButton.innerText == "OFF Auto") {
+    autoButton.innerHTML = "Auto";
+    clearTimeout(slideTimeout);
+  } else if (autoButton.innerText == "Auto") {
+    autoButton.innerHTML = "OFF Auto";
+    autoSlider();
+  }
+  console.log(autoButton.value);
 });
